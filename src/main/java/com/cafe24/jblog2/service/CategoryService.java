@@ -22,4 +22,8 @@ public class CategoryService {
 		return categoryDao.addCategory(categoryVo);
 	}
 
+	public Boolean deleteCategory(int category_no) {
+		return categoryDao.deleteCategory(category_no);
+	}
+
 }

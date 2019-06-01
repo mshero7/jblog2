@@ -9,6 +9,12 @@
 		]]>
 	</insert>
 	
+	<delete id="deleteCategory">
+		<![CDATA[
+			delete from category where no = #{no}
+		]]>
+	</delete>
+	
 	<select id="getCategoryList" resultType="categoryvo">
 		<![CDATA[
 			select no,name,description,enroll_date,blog_id from category where blog_id=#{blog_id};

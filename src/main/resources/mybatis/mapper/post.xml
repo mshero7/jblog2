@@ -3,6 +3,13 @@
 
 
 <mapper namespace="post">
+
+	<delete id="deleteByCategory">
+		<![CDATA[
+			delete from post where category_no = #{category_no}
+		]]>
+	</delete>
+	
 	<insert id="postWrite" parameterType="postvo">
 		<![CDATA[
 			insert into post values (null,#{title},#{contents},now(),#{category_no});

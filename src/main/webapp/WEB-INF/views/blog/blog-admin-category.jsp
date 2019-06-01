@@ -6,6 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script> 
+	$(docsument).ready( function(){
+	    $("#category_delete").click( function() {
+	        if(confirm("카테고리를 삭제하면 하위 글까지 모두 삭제됩니다. 그래도 삭제하시겠습니까?")) {
+	            $(this).parent().click();
+	        } else {
+	            return false;
+	        }
+	    });
+	});
+</script>
 <title>JBlog</title>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath}/assets/css/jblog.css">
@@ -28,18 +39,33 @@
 		      		</tr>
 					<c:set var="count" value="${fn:length(categoryList) }"/>
 					<c:forEach items="${categoryList }" var="categoryList" varStatus="status">
-						<tr>
-							<td>${ status.index + 1 }</td>
-							<td>${categoryList.name }</td>
-							<td>1</td> <!-- 수정해야함 -->
-							<td>${categoryList.description }</td>
-							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-						</tr>
+					
+					<c:choose>
+						<c:when test="${categoryList.name  eq '(분류되지 않은 게시물들)'}">
+							<tr>
+								<td>${ status.index + 1 }</td>
+								<td>${categoryList.name }</td>
+								<td>1</td> <!-- 수정해야함 -->
+								<td>${categoryList.description }</td>
+								<td></td>	
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>${ status.index + 1 }</td>
+								<td>${categoryList.name }</td>
+								<td>1</td> <!-- 수정해야함 -->
+								<td>${categoryList.description }</td>
+								<td><a id="category_delete" href="${pageContext.request.contextPath}/${authUser.id }/admin/category/delete/${categoryList.no}"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+					
 					</c:forEach>					  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.servletContext.contextPath }/${authUser.id}/admin/CategoryAdd" method="POST">
+      			<form action="${pageContext.servletContext.contextPath }/${authUser.id}/admin/category/add" method="POST">
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>

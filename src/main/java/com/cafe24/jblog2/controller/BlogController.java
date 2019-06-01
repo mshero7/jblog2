@@ -1,6 +1,5 @@
 package com.cafe24.jblog2.controller;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,6 @@ import com.cafe24.jblog2.service.BlogService;
 import com.cafe24.jblog2.service.CategoryService;
 import com.cafe24.jblog2.service.FileUploadService;
 import com.cafe24.jblog2.service.PostService;
-import com.cafe24.jblog2.util.OptionalUtil;
 import com.cafe24.jblog2.vo.BlogVo;
 import com.cafe24.jblog2.vo.CategoryVo;
 import com.cafe24.jblog2.vo.PostVo;
@@ -108,7 +106,7 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/admin/CategoryAdd", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
 	public String blogAddCategory(@PathVariable("blog_id") String blog_id,
 			@ModelAttribute CategoryVo categoryVo, Model model) {
 		System.out.println(categoryVo);
@@ -118,6 +116,24 @@ public class BlogController {
 		model.addAttribute("logo", blogVo.getLogo());
 		
 		categoryService.addCategory(categoryVo);
+		return "redirect:/" + blog_id+"/admin/category";
+	}
+
+	@Auth
+	@RequestMapping(value = "/admin/category/delete/{no}", method = RequestMethod.GET)
+	public String blogDeleteCategory(
+			@PathVariable("blog_id") String blog_id,
+			@PathVariable("no") int category_no,
+			@ModelAttribute CategoryVo categoryVo,
+			Model model) {
+		
+		BlogVo blogVo = blogService.getBlogInfo(blog_id);
+		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("logo", blogVo.getLogo());
+		
+		postService.deleteByCategory(category_no);
+		categoryService.deleteCategory(category_no);
+		
 		return "redirect:/" + blog_id+"/admin/category";
 	}
 	

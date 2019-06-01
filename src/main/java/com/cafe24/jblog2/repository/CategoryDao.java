@@ -30,6 +30,11 @@ public class CategoryDao {
 		int num = sqlSession.insert("category.addCategory",categoryVo);
 		return num == 1;
 	}
+
+	public Boolean deleteCategory(int category_no) {
+		int num = sqlSession.delete("category.deleteCategory",category_no);
+		return num == 1;
+	}
 	
 	
 }

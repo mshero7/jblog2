@@ -7,7 +7,7 @@
 <div id="header">
 		<c:choose>
 			<c:when test="${empty authUser }">
-				<h1>${blogVo.title}</h1>
+				<h1><a href="${pageContext.servletContext.contextPath }/${blogVo.blog_id}">메인</a>${blogVo.title}</h1>
 					<ul>
 						<li><a href="${pageContext.servletContext.contextPath }/">메인</a></li>
 						<li><a href="${pageContext.servletContext.contextPath }/user/login">로그인</a></li>

@@ -26,5 +26,9 @@ public class PostService {
 	public List<PostVo> getCategoryPost(Integer category_no) {
 		return postDao.getCategoryPost(category_no);
 	}
+
+	public Boolean deleteByCategory(int category_no) {
+		return postDao.deleteByCategory(category_no);
+	}
 	
 }

@@ -30,4 +30,9 @@ public class PostDao {
 		return result;
 	}
 
+	public Boolean deleteByCategory(int category_no) {
+		int result = sqlSession.delete("post.deleteByCategory",category_no);
+		return result == 1;
+	}
+
 }
