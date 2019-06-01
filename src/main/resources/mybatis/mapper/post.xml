@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="post">
+	<insert id="postWrite" parameterType="postvo">
+		<![CDATA[
+			insert into post values (null,#{title},#{contents},now(),#{category_no});
+		]]>
+	</insert>
+	
+	<select id="getPostList" resultType="postvo">
+		<![CDATA[
+			select no,title,contents,write_date,category_no from post where category_no = #{category_no}
+	 	]]>	
+	</select>
+
+	<select id="postInfo" parameterType="postvo" resultType="postvo">
+		<![CDATA[
+			select title,contents,write_date from post where category_no = #{category_no} and no = #{no}
+	 	]]>	
+	</select>
+	
+	<select id="categoryPost" resultType="postvo">
+		<![CDATA[
+			select no,title,contents,write_date,category_no from post where category_no = #{category_no}
+	 	]]>	
+	</select>
+</mapper>
