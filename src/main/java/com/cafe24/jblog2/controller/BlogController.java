@@ -27,10 +27,11 @@ import com.cafe24.jblog2.vo.UserVo;
 @Controller
 @RequestMapping("/{blog_id:(?!assets|images).*}")
 public class BlogController {
-
+	
 	@Autowired
 	BlogService blogService;
 
+	
 	@Autowired
 	CategoryService categoryService;
 	
