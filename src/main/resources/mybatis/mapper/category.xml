@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="category">
+	<insert id="join" parameterType="categoryvo">
+		<![CDATA[
+			insert into category values(null,#{name},#{description},now(),#{blog_id});
+		]]>
+	</insert>
+
+	<delete id="deleteCategory">
+		<![CDATA[
+			delete from category where no = #{no}
+		]]>
+	</delete>
+
+	<select id="getCategoryList" resultType="categoryvo">
+		<![CDATA[
+			select no,name,description,enroll_date,blog_id from category where blog_id=#{blog_id};
+	 	]]>	
+	</select>
+
+	<insert id="addCategory" parameterType="categoryvo">
+		<![CDATA[
+			insert into category values(null,#{name},#{description},now(),#{blog_id});
+		]]>
+	</insert>
+</mapper>
