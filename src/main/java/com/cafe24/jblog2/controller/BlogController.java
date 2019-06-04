@@ -78,7 +78,7 @@ public class BlogController {
 	@RequestMapping(value = "/admin/basic", method = RequestMethod.GET)
 	public String admin(@PathVariable("blog_id") String blog_id, @AuthUser UserVo authUser, Model model) {
 		if (!authUser.getId().equals(blog_id)) {
-			return "redirect:/blog/" + blog_id;
+			return "redirect:/" + blog_id;
 		}
 
 		BlogVo blogVo = blogService.getBlogInfo(blog_id);
